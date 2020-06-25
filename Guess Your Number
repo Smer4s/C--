@@ -1,0 +1,65 @@
+// Guess My Number,только наоборот: Игрок загадывает число, компьютер отгадывает.
+#include <cstdlib>
+#include <iostream>
+#include <ctime>
+using namespace std;
+
+int main()
+{
+    srand(static_cast<unsigned int>(time(0)));
+    int randNum = 50,x=0,tries=0,rnd1=0,rnd2=0; 
+    char answer1,answer;
+    while (x);
+    {
+        cout << "\tGuess Your Number\n\n" << endl;
+        cout << "Is this a " << randNum << "?(y/n)" << endl;
+        cin >> answer1;
+        while(answer1!='y')
+        {
+            cout << "My number is lower or higher?(l/h)" << endl;
+            cin >> answer;
+            if (answer == 'l')
+            {
+                if (tries == 0)
+                {
+                    randNum = 75;
+                    rnd2 = 25;
+                    rnd1 = 25;
+                    cout << "Is this a " << randNum << "?(y/n)" << endl;
+                    ++tries;
+                    cin >> answer1;
+                }
+                else
+                {
+                    randNum = randNum + abs(50 - rnd2) / 2;
+                    cout << "Is this a " << randNum << "?(y/n)" << endl;
+                    ++tries;
+                    rnd2 = randNum;
+                    cin >> answer1;
+                }
+            }
+            if (answer == 'h')
+            {
+                if (tries == 0)
+                {
+                    rnd1 = 25;
+                    rnd2 = 25;
+                    randNum = 25;
+                    cout << "Is this a " << randNum << "?(y/n)" << endl;
+                    ++tries;
+                    cin >> answer1;
+                }
+                else
+                {
+                    randNum = randNum - abs(50 - rnd1) / 2;
+                    cout << "Is this a " << randNum << "?(y/n)" << endl;
+                    ++tries;
+                    rnd1 = randNum;
+                    cin >> answer1;
+                }
+            }
+        }
+    }
+    cout << "I guessed the Number in " << tries+1 << " tries!" << endl;
+    return 0;
+}
