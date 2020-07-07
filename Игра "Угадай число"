@@ -8,60 +8,41 @@ using namespace std;
 
 int main()
 {
-    srand(static_cast<unsigned int>(time(0)));
-    int randNum = 50,x=0,tries=0,rnd1=0,rnd2=0; 
-    char answer1,answer;
-    while (x);
-    {
-        cout << "\tGuess Your Number\n\n" << endl;
+    int rnd1 = 0, rnd2 = 100, tries = 1;
+    int randNum = (rnd2 - rnd1) / 2;
+    char answer, answer1;
+    cout << "\tWelcome to Guess Your Number" << endl;
+    while (true) {
+
         cout << "Is this a " << randNum << "?(y/n)" << endl;
+
         cin >> answer1;
-        while(answer1!='y')
-        {
-            cout << "My number is lower or higher?(l/h)" << endl;
-            cin >> answer;
-            if (answer == 'l')
-            {
-                if (tries == 0)
-                {
-                    randNum = 75;
-                    rnd2 = 25;
-                    rnd1 = 25;
-                    cout << "Is this a " << randNum << "?(y/n)" << endl;
-                    ++tries;
-                    cin >> answer1;
-                }
-                else
-                {
-                    randNum = randNum + abs(50 - rnd2) / 2;
-                    cout << "Is this a " << randNum << "?(y/n)" << endl;
-                    ++tries;
-                    rnd2 = randNum;
-                    cin >> answer1;
-                }
-            }
-            if (answer == 'h')
-            {
-                if (tries == 0)
-                {
-                    rnd1 = 25;
-                    rnd2 = 25;
-                    randNum = 25;
-                    cout << "Is this a " << randNum << "?(y/n)" << endl;
-                    ++tries;
-                    cin >> answer1;
-                }
-                else
-                {
-                    randNum = randNum - abs(50 - rnd1) / 2;
-                    cout << "Is this a " << randNum << "?(y/n)" << endl;
-                    ++tries;
-                    rnd1 = randNum;
-                    cin >> answer1;
-                }
-            }
+
+        if (answer1 == 'y') {
+
+            break;
+
         }
+        cout << "My number is lower or higher?(l/h)" << endl; // Здесь идёт речь о числе, которое выдал компьютер
+                                                              // Т.е. если твоё число меньше, то число компьтера больше(тогда отвечать h)
+
+        cin >> answer;
+
+        if (answer == 'l') {
+
+            rnd2 += abs((rnd2 - rnd1) / 2);
+
+            randNum += abs((rnd2 - rnd1) / 2);
+
+        }
+        else {
+
+            rnd1 -= abs((rnd2 - rnd1) / 2);
+
+            randNum -= abs((rnd2 - rnd1) / 2);
+
+        }
+        ++tries;
     }
-    cout << "I guessed the Number in " << tries+1 << " tries!" << endl;
-    return 0;
+    cout << "I guessed the Number in " << tries << " tries!" << endl;
 }
